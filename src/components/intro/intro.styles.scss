@@ -1,0 +1,27 @@
+.intro {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  color: #293264;
+
+  &__heading {
+    font-family: "Karla";
+    font-style: normal;
+    font-weight: 700;
+    font-size: 31.25px;
+    line-height: 37px;
+    text-align: center;
+    margin: 0 auto;
+  }
+
+  &__description {
+    font-family: "Inter";
+    font-style: normal;
+    font-weight: 400;
+    font-size: 16px;
+    line-height: 19px;
+    text-align: center;
+    margin: 1.8rem auto 2.5rem auto;
+  }
+}
