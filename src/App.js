@@ -1,13 +1,17 @@
 import Intro from "./components/intro/intro.component";
+import Quizz from "./components/quizz/quizz.component";
+import { BrowserRouter } from "react-router-dom";
 import { Routes, Route } from "react-router-dom";
 
 function App() {
   return (
     <div className="quizzical__container">
-      <Routes>
-        <Route path="/" element={<Intro />} />
-        <Route path="/" element={<Intro />} />
-      </Routes>
+      <BrowserRouter>
+        <Routes>
+          <Route path="/" element={<Intro />} />
+          <Route path="/quizz" element={<Quizz />} />
+        </Routes>
+      </BrowserRouter>
     </div>
   );
 }

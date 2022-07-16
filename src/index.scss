@@ -21,6 +21,11 @@ body {
   align-items: center;
 }
 
+a {
+  text-decoration: none;
+  color: #f5f7fb;
+}
+
 code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, "Courier New",
     monospace;
@@ -32,7 +37,7 @@ code {
   justify-content: center;
   align-items: center;
   background-color: #f5f7fb;
-  padding: 14rem;
+  padding: 10rem;
   border-radius: 10px;
   box-shadow: 0.1px 0.1px 0 5px rgba(0, 0, 0, 0.1);
 }
@@ -49,5 +54,11 @@ code {
     background: #4d5b9e;
     border-radius: 15px;
     border: none;
+    cursor: pointer;
+    transition: 0.2s ease-out;
+
+    &:hover {
+      background: #5b669b;
+    }
   }
 }
