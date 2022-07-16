@@ -6,10 +6,19 @@ $color--primary: #293264;
 
 body {
   margin: 0;
-  background-color: #f5f7fb;
+  background-color: $color--primary;
   font-family: "Karla", "Inter", sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+  background-image: url("./content/hero.svg");
+  background-repeat: none;
+  background-size: cover;
+  width: 100vw;
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
 }
 
 code {
@@ -18,16 +27,18 @@ code {
 }
 
 .quizzical__container {
-  width: 100vw;
-  height: 99vh;
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
+  background-color: #f5f7fb;
+  padding: 14rem;
+  border-radius: 10px;
+  box-shadow: 0.1px 0.1px 0 5px rgba(0, 0, 0, 0.1);
 }
 
 .btn {
-  padding: 1.5rem 6rem;
+  padding: 1.5rem 5rem;
 
   &--primary {
     font-family: "Inter";
