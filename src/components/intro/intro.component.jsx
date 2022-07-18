@@ -1,7 +1,7 @@
 import "./intro.styles.scss";
 import { Link } from "react-router-dom";
 
-function Intro() {
+function Intro(props) {
   return (
     <div className="intro">
       <h1 className="intro__heading">Quizzical</h1>

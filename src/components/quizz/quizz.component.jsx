@@ -1,63 +1,51 @@
 import "./quizz.styles.scss";
+import { useState, useEffect } from "react";
 
 const Quizz = () => {
+  const [questions, setQuestions] = useState([]);
+
+  function getQuestions() {
+    fetch("https://opentdb.com/api.php?amount=5&type=multiple")
+      .then((response) => response.json())
+      .then((data) => setQuestions(data.results));
+  }
+
+  console.log(questions);
+
+  useEffect(getQuestions, []);
+
+  // Get questions answers in an array.
+  // Randomise the array.
+  // Generate the answers.
+  const questionsElements = questions.map((question, index) => {
+    const questionsAnswers = [
+      ...question.incorrect_answers,
+      question.correct_answer,
+    ];
+    console.log(questionsAnswers);
+    return (
+      <div className="quizz__question" key={index}>
+        <h3 className="question__heading">{question.question}</h3>
+        <div className="question__answers-container">
+          {questionsAnswers.map((answer, index) => {
+            return (
+              <div className="question__answer" key={index}>
+                {answer}
+              </div>
+            );
+          })}
+        </div>
+      </div>
+    );
+  });
+
   return (
     <div className="quizz">
-      <div className="quizz__question">
-        <h3 className="question__heading">
-          How would one say goodbye in Spanish?
-        </h3>
-        <div className="question__answers-container">
-          <div className="question__answer question__answer--selected">
-            Adios
-          </div>
-          <div className="question__answer">Hola</div>
-          <div className="question__answer">Au Revoir</div>
-          <div className="question__answer">Salir</div>
-        </div>
-      </div>
-      <div className="quizz__question">
-        <h3 className="question__heading">
-          Which best selling toy of 1983 caused hysteria, resulting in riots
-          breaking in stores?
-        </h3>
-        <div className="question__answers-container">
-          <div className="question__answer question__answer--correct">
-            Cabbage Patch Kids
-          </div>
-          <div className="question__answer">Transformers</div>
-          <div className="question__answer">Care Bears</div>
-          <div className="question__answer">Rubik'k Cube</div>
-        </div>
-      </div>
-      <div className="quizz__question">
-        <h3 className="question__heading">
-          What is the hottest planet in our Solar System?
-        </h3>
-        <div className="question__answers-container">
-          <div className="question__answer">Mercury</div>
-          <div className="question__answer question__answer--selected">
-            Venus
-          </div>
-          <div className="question__answer">Mars</div>
-          <div className="question__answer">Saturn</div>
-        </div>
-      </div>
-      <div className="quizz__question">
-        <h3 className="question__heading">
-          In which country was the caesar salad invented?
-        </h3>
-        <div className="question__answers-container">
-          <div className="question__answer">Itlay</div>
-          <div className="question__answer question__answer--selected">
-            Portugal
-          </div>
-          <div className="question__answer">Mexico</div>
-          <div className="question__answer">France</div>
-        </div>
-      </div>
+      {questionsElements}
       <div className="quizz__btn-container">
-        <button className="quizz__btn">Check Answers</button>
+        <button className="quizz__btn" onClick={getQuestions}>
+          Check Answers
+        </button>
       </div>
     </div>
   );
