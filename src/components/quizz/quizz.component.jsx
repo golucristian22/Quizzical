@@ -3,6 +3,8 @@ import { useState, useEffect } from "react";
 
 const Quizz = () => {
   const [questions, setQuestions] = useState([]);
+  const [score, setScore] = useState(0);
+  const [gameOver, setGameOver] = useState(false);
 
   function getQuestions() {
     fetch("https://opentdb.com/api.php?amount=5&type=multiple")
@@ -33,20 +35,23 @@ const Quizz = () => {
       );
       // Loop through each answer to check if it's true or false to add the specific class
       allQuestionAnswers.forEach((questionAnswer) => {
+        questionAnswer.classList.add("question__answer--disabled");
         if (questionAnswer.classList.contains("question__answer--selected")) {
           const correctAnswer = questions[i].correct_answer;
           if (questionAnswer.innerText === correctAnswer) {
             questionAnswer.classList.add("question__answer--correct");
+            setScore((prevScore) => (prevScore = prevScore + 1));
           } else {
             questionAnswer.classList.add("question__answer--wrong");
             // Loop again through all answers to show the correct one.
-            allQuestionAnswers.forEach((questionAnswer) => {
-              if (questionAnswer.innerText === correctAnswer) {
-                questionAnswer.classList.add("question__answer--correct");
+            allQuestionAnswers.forEach((questionAnswer2) => {
+              if (questionAnswer2.innerText === correctAnswer) {
+                questionAnswer2.classList.add("question__answer--correct");
               }
             });
           }
         }
+        setGameOver(true);
       });
     }
   }
@@ -91,9 +96,20 @@ const Quizz = () => {
     <div className="quizz">
       {questionsElements}
       <div className="quizz__btn-container">
-        <button className="quizz__btn" onClick={checkAnswers}>
-          Check Answers
-        </button>
+        {gameOver && (
+          <p className="quizz__score">
+            You scored {`${score}/${questions.length}`} correct answers
+          </p>
+        )}
+        {gameOver ? (
+          <button className="quizz__btn" onClick={checkAnswers}>
+            Play Again
+          </button>
+        ) : (
+          <button className="quizz__btn" onClick={checkAnswers}>
+            Check Answers
+          </button>
+        )}
       </div>
     </div>
   );

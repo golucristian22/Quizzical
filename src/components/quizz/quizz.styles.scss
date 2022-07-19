@@ -14,8 +14,18 @@
 
   &__btn-container {
     display: flex;
-    justify-content: center;
+    justify-content: space-between;
+    align-items: center;
     width: 100%;
+  }
+
+  &__score {
+    font-family: "Inter";
+    font-weight: bold;
+    font-size: 13px;
+    text-align: center;
+    color: #293264;
+    margin: 0 0 0 50px;
   }
 
   &__btn {
@@ -32,6 +42,7 @@
     cursor: pointer;
     transition: 0.2s ease-out;
     letter-spacing: 0.5px;
+    margin: 0 0 0 auto;
 
     &:hover {
       background: #5b669b;
@@ -76,6 +87,9 @@
     &--correct {
       background: #94d7a2;
       border: 0;
+      opacity: 1 !important;
+      pointer-events: none;
+      cursor: default;
     }
 
     &--wrong {
