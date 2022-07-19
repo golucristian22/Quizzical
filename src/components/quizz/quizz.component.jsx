@@ -56,6 +56,21 @@ const Quizz = () => {
     }
   }
 
+  function resetGame() {
+    setGameOver(false);
+    setScore(0);
+    getQuestions();
+    const allAnswers = document.querySelectorAll(".question__answer");
+    allAnswers.forEach((answer) => {
+      answer.classList.remove(
+        "question__answer--disabled",
+        "question__answer--selected",
+        "question__answer--correct",
+        "question__answer--wrong"
+      );
+    });
+  }
+
   console.log(questions);
 
   useEffect(getQuestions, []);
@@ -102,7 +117,7 @@ const Quizz = () => {
           </p>
         )}
         {gameOver ? (
-          <button className="quizz__btn" onClick={checkAnswers}>
+          <button className="quizz__btn" onClick={resetGame}>
             Play Again
           </button>
         ) : (
