@@ -55,18 +55,22 @@
   }
 
   &__answer {
+    display: flex;
+    justify-content: center;
+    align-items: center;
     border: 0.8px solid #4d5b9e;
     border-radius: 8px;
     padding: 4px 10px;
     font-family: "Inter";
     font-weight: 500;
     font-size: 10px;
-    text-align: center;
     color: #293264;
+    cursor: pointer;
 
     &--selected {
       background: #d6dbf5;
       border: 0;
+      padding: 4.8px 10.8px;
     }
 
     &--correct {
