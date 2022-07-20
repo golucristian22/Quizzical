@@ -6,6 +6,7 @@ const Quizz = () => {
   const [score, setScore] = useState(0);
   const [gameOver, setGameOver] = useState(false);
 
+  console.log(questions);
   function getQuestions() {
     fetch("https://opentdb.com/api.php?amount=5&type=multiple")
       .then((response) => response.json())
@@ -71,18 +72,13 @@ const Quizz = () => {
     });
   }
 
-  console.log(questions);
-
   useEffect(getQuestions, []);
 
   const questionsElements = questions.map((question, questionIndex) => {
     const questionsAnswers = [
       ...question.incorrect_answers,
       question.correct_answer,
-    ];
-
-    // Generates random order since the correct answer is always the last.
-    questionsAnswers.sort(() => Math.random() - 0.5);
+    ].sort(); // sort them because the correct answer is always at the end & random order is bugged due to rerendering
 
     return (
       <div
