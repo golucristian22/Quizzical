@@ -1,15 +1,20 @@
 import "./quizz.styles.scss";
 import { useState, useEffect } from "react";
 
-const Quizz = () => {
+const Quizz = (props) => {
   const [questions, setQuestions] = useState([]);
   const [score, setScore] = useState(0);
   const [gameOver, setGameOver] = useState(false);
 
   console.log(questions);
   function getQuestions() {
-    fetch("https://opentdb.com/api.php?amount=5&type=multiple")
-      .then((response) => response.json())
+    fetch(`https://opentdb.com/api.php?amount=10&token=${props.token}`)
+      .then((response) => {
+        if (!response.ok) {
+          throw new Error("Network response was not OK");
+        }
+        return response.json();
+      })
       .then((data) => setQuestions(data.results));
   }
 
@@ -72,7 +77,7 @@ const Quizz = () => {
     });
   }
 
-  useEffect(getQuestions, []);
+  useEffect(getQuestions, [props.token]);
 
   function decodeHtml(html) {
     const txt = document.createElement("textarea");
