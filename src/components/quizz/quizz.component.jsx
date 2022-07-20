@@ -74,6 +74,12 @@ const Quizz = () => {
 
   useEffect(getQuestions, []);
 
+  function decodeHtml(html) {
+    const txt = document.createElement("textarea");
+    txt.innerHTML = html;
+    return txt.value;
+  }
+
   const questionsElements = questions.map((question, questionIndex) => {
     const questionsAnswers = [
       ...question.incorrect_answers,
@@ -85,7 +91,7 @@ const Quizz = () => {
         className={`quizz__question question-${questionIndex}`}
         key={questionIndex}
       >
-        <h3 className="question__heading">{question.question}</h3>
+        <h3 className="question__heading">{decodeHtml(question.question)}</h3>
         <div className="question__answers-container">
           {questionsAnswers.map((answer, answerIndex) => {
             return (
@@ -94,7 +100,7 @@ const Quizz = () => {
                 key={answerIndex}
                 onClick={selectAnswer}
               >
-                {answer}
+                {decodeHtml(answer)}
               </div>
             );
           })}
