@@ -1,0 +1,60 @@
+.settings {
+  position: absolute;
+  top: -42px;
+  left: -50px;
+  display: flex;
+  gap: 10px;
+
+  &__icon {
+    width: 25px;
+    height: 25px;
+    z-index: 2;
+    cursor: pointer;
+    transition: all 0.1s ease-out;
+
+    &:hover {
+      transform: scale(1.05);
+      fill: #293264;
+    }
+  }
+
+  &__container {
+    display: flex;
+    max-height: 1px;
+    visibility: hidden;
+    flex-direction: column;
+    z-index: 1;
+    width: 250px;
+    background-color: #293264;
+    border-radius: 5px;
+    padding: 10px;
+    transform: translateY(-10px);
+    transform: translateX(-10px);
+    transition: all 0.25s ease-out;
+    opacity: 0;
+
+    &.extended {
+      visibility: visible;
+      max-height: 200px;
+      height: 200px;
+      transform: translateX(0);
+      transform: translateY(-10px);
+      opacity: 1;
+    }
+  }
+
+  &__label {
+    font-size: 15px;
+    color: white;
+    margin-bottom: 5px;
+    font-weight: bold;
+    letter-spacing: 0.2px;
+  }
+
+  &__categories {
+    border-radius: 5px;
+    font-weight: 600;
+    letter-spacing: 1px;
+    padding: 2px;
+  }
+}

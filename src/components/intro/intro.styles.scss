@@ -1,4 +1,5 @@
 .intro {
+  position: relative;
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -23,5 +24,9 @@
     line-height: 19px;
     text-align: center;
     margin: 1.8rem auto 2.5rem auto;
+  }
+
+  &__btn {
+    padding: 1.5rem 6rem;
   }
 }
