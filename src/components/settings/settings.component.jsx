@@ -4,7 +4,7 @@ import settingsIcon from "../../content/settings-icon.svg";
 function Settings(props) {
   const categories = props.categories;
   let categoriesNames;
-  console.log(categories);
+
   if (categories.length > 0) {
     categoriesNames = categories.map((category) => {
       return (

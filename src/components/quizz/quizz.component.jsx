@@ -6,12 +6,9 @@ const Quizz = (props) => {
   const [score, setScore] = useState(0);
   const [gameOver, setGameOver] = useState(false);
 
-  // BUG: Doesn't Read the props.category
-  // console.log(questions);
-  console.log(props.category);
+  console.log(questions);
+
   function getQuestions() {
-    // https://opentdb.com/api.php?amount=10&category=24&difficulty=medium&type=multiple
-    // fetch(`https://opentdb.com/api.php?amount=10&token=${props.token}`)
     fetch(
       `https://opentdb.com/api.php?amount=10&category=${props.category}&difficulty=medium&type=multiple&token=${props.token}`
     )

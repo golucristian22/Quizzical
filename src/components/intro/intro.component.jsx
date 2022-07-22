@@ -11,10 +11,6 @@ function Intro(props) {
       .then((response) => response.json())
       .then((data) => setCategories(data.trivia_categories));
   }, []);
-  // console.log(categories);
-
-  // const categoriesName = categories.map((category) => category.name);
-  // console.log(categoriesName);
 
   return (
     <div className="intro">
