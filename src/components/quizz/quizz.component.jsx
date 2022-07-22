@@ -6,9 +6,15 @@ const Quizz = (props) => {
   const [score, setScore] = useState(0);
   const [gameOver, setGameOver] = useState(false);
 
-  console.log(questions);
+  // BUG: Doesn't Read the props.category
+  // console.log(questions);
+  console.log(props.category);
   function getQuestions() {
-    fetch(`https://opentdb.com/api.php?amount=10&token=${props.token}`)
+    // https://opentdb.com/api.php?amount=10&category=24&difficulty=medium&type=multiple
+    // fetch(`https://opentdb.com/api.php?amount=10&token=${props.token}`)
+    fetch(
+      `https://opentdb.com/api.php?amount=10&category=${props.category}&difficulty=medium&type=multiple&token=${props.token}`
+    )
       .then((response) => {
         if (!response.ok) {
           throw new Error("Network response was not OK");
@@ -77,7 +83,7 @@ const Quizz = (props) => {
     });
   }
 
-  useEffect(getQuestions, [props.token]);
+  useEffect(getQuestions, [props.token, props.category]);
 
   function decodeHtml(html) {
     const txt = document.createElement("textarea");

@@ -7,6 +7,7 @@ import { BrowserRouter, Routes, Route } from "react-router-dom";
 
 function App() {
   const [token, setToken] = useState("");
+  const [category, setCategory] = useState("9");
 
   const getSessionToken = () => {
     fetch("https://opentdb.com/api_token.php?command=request")
@@ -14,15 +15,32 @@ function App() {
       .then((data) => setToken(data.token));
   };
 
+  function selectCategory() {
+    const selectedCategories = document.querySelector(".settings__categories");
+    setCategory(
+      selectedCategories.options[selectedCategories.selectedIndex].id
+    );
+    console.log(category);
+  }
+
   return (
     <div className="quizzical__container">
       <BrowserRouter>
         <Routes>
           <Route
             path="/"
-            element={<Intro getSessionToken={getSessionToken} />}
+            element={
+              <Intro
+                getSessionToken={getSessionToken}
+                selectCategory={selectCategory}
+              />
+            }
           />
-          <Route path="quizz" element={<Quizz token={token} />} />
+          <Route
+            path="quizz"
+            element={<Quizz token={token} />}
+            category={category}
+          />
         </Routes>
       </BrowserRouter>
     </div>

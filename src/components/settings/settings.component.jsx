@@ -4,13 +4,23 @@ import settingsIcon from "../../content/settings-icon.svg";
 function Settings(props) {
   const categories = props.categories;
   let categoriesNames;
+  console.log(categories);
   if (categories.length > 0) {
     categoriesNames = categories.map((category) => {
-      return <option value={category.name}>{category.name}</option>;
+      return (
+        <option key={category.id} id={category.id} value={category.name}>
+          {category.name}
+        </option>
+      );
     });
   }
 
-  function toggleExtended(e) {
+  // After the option is selected I need to pass data to the Quizz Component through props from App Component to call the api accordingly
+  // The API should be modified to match the selected option
+  // https://opentdb.com/api.php?amount=10&category=20&difficulty=medium&type=multiple
+  // https://opentdb.com/api.php?amount=10&category={selectedOptionId}&difficulty=medium&type=multiple
+
+  function toggleExtended() {
     const settingsContainer = document.querySelector(".settings__container");
     settingsContainer.classList.toggle("extended");
   }
@@ -31,6 +41,7 @@ function Settings(props) {
           className="settings__categories"
           name="categories"
           id="categories"
+          onChange={props.selectCategory}
         >
           {categoriesNames}
         </select>
