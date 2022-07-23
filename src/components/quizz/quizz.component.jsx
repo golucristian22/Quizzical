@@ -1,23 +1,11 @@
 import "./quizz.styles.scss";
 import { useState, useEffect } from "react";
+import PulseLoader from "react-spinners/PulseLoader";
 
 const Quizz = (props) => {
-  const [questions, setQuestions] = useState([]);
+  const [loading, setLoading] = useState(false);
   const [score, setScore] = useState(0);
   const [gameOver, setGameOver] = useState(false);
-
-  function getQuestions() {
-    fetch(
-      `https://opentdb.com/api.php?amount=${props.numberOfQuestions}&category=${props.category}&difficulty=${props.difficulty}&type=multiple&token=${props.token}`
-    )
-      .then((response) => {
-        if (!response.ok) {
-          throw new Error("Network response was not OK");
-        }
-        return response.json();
-      })
-      .then((data) => setQuestions(data.results));
-  }
 
   function selectAnswer(e) {
     // Select an answer
@@ -44,7 +32,7 @@ const Quizz = (props) => {
       allQuestionAnswers.forEach((questionAnswer) => {
         questionAnswer.classList.add("question__answer--disabled");
         if (questionAnswer.classList.contains("question__answer--selected")) {
-          const correctAnswer = questions[i].correct_answer;
+          const correctAnswer = props.questions[i].correct_answer;
           if (questionAnswer.innerText === correctAnswer) {
             questionAnswer.classList.add("question__answer--correct");
             setScore((prevScore) => (prevScore = prevScore + 1));
@@ -64,9 +52,10 @@ const Quizz = (props) => {
   }
 
   function resetGame() {
+    props.getQuestions();
+    placeLoadingScreen();
     setGameOver(false);
     setScore(0);
-    getQuestions();
     const allAnswers = document.querySelectorAll(".question__answer");
     allAnswers.forEach((answer) => {
       answer.classList.remove(
@@ -78,12 +67,14 @@ const Quizz = (props) => {
     });
   }
 
-  useEffect(getQuestions, [
-    props.token,
-    props.category,
-    props.difficulty,
-    props.numberOfQuestions,
-  ]);
+  function placeLoadingScreen() {
+    setLoading(true);
+    setTimeout(() => {
+      setLoading(false);
+    }, 1300);
+  }
+
+  useEffect(placeLoadingScreen, []);
 
   function decodeHtml(html) {
     const txt = document.createElement("textarea");
@@ -91,7 +82,7 @@ const Quizz = (props) => {
     return txt.value;
   }
 
-  const questionsElements = questions.map((question, questionIndex) => {
+  const questionsElements = props.questions.map((question, questionIndex) => {
     const questionsAnswers = [
       ...question.incorrect_answers,
       question.correct_answer,
@@ -122,23 +113,38 @@ const Quizz = (props) => {
 
   return (
     <div className="quizz">
-      {questions.length > 1 ? questionsElements : ""}
-      <div className="quizz__btn-container">
-        {gameOver && (
-          <p className="quizz__score">
-            You scored {`${score}/${questions.length}`} correct answers
-          </p>
-        )}
-        {gameOver ? (
-          <button className="quizz__btn" onClick={resetGame}>
-            Play Again
-          </button>
-        ) : (
-          <button className="quizz__btn" onClick={checkAnswers}>
-            Check Answers
-          </button>
-        )}
-      </div>
+      {loading ? (
+        <>
+          <PulseLoader
+            color="#999"
+            loading={loading}
+            margin={5}
+            size={10}
+            speedMultiplier={0.7}
+          />
+        </>
+      ) : (
+        <>
+          {props.questions.length > 1 ? questionsElements : ""}
+          <div className="quizz__btn-container">
+            {gameOver && (
+              <p className="quizz__score">
+                You scored {`${score}/${props.questions.length}`} correct
+                answers
+              </p>
+            )}
+            {gameOver ? (
+              <button className="quizz__btn" onClick={resetGame}>
+                Play Again
+              </button>
+            ) : (
+              <button className="quizz__btn" onClick={checkAnswers}>
+                Check Answers
+              </button>
+            )}
+          </div>
+        </>
+      )}
     </div>
   );
 };
