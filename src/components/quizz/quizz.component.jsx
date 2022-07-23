@@ -71,7 +71,7 @@ const Quizz = (props) => {
     setLoading(true);
     setTimeout(() => {
       setLoading(false);
-    }, 1300);
+    }, 2000);
   }
 
   useEffect(placeLoadingScreen, []);
@@ -120,7 +120,7 @@ const Quizz = (props) => {
             loading={loading}
             margin={5}
             size={10}
-            speedMultiplier={0.7}
+            speedMultiplier={0.6}
           />
         </>
       ) : (
