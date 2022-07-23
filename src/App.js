@@ -7,7 +7,7 @@ function App() {
   const [token, setToken] = useState("");
   const [questions, setQuestions] = useState([]);
   const [numberOfQuestions, setNumberOfQuestions] = useState(10);
-  const [difficulty, setDifficulty] = useState("medium");
+  const [difficulty, setDifficulty] = useState("easy");
   const [category, setCategory] = useState("");
 
   const getSessionToken = () => {

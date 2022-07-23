@@ -48,7 +48,7 @@ function Settings(props) {
           </label>
           <input
             type="number"
-            placeholder="10"
+            placeholder="Up to 10"
             min="1"
             max="10"
             className="settings__input"
@@ -57,7 +57,7 @@ function Settings(props) {
         </div>
         <div className="settings__option-container">
           <label className="settings__label" htmlFor="categories">
-            Select the questions difficulty:
+            Select the difficulty:
           </label>
           <select
             className="settings__selection"
@@ -69,7 +69,7 @@ function Settings(props) {
               )
             }
           >
-            <option value="" disabled selected></option>
+            <option value="" disabled></option>
             <option value="easy">easy</option>
             <option value="medium">medium</option>
             <option value="hard">hard</option>
