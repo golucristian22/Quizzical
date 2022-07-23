@@ -6,11 +6,6 @@ const Quizz = (props) => {
   const [score, setScore] = useState(0);
   const [gameOver, setGameOver] = useState(false);
 
-  console.log(questions);
-  console.log(
-    `https://opentdb.com/api.php?amount=${props.numberOfQuestions}&category=${props.category}&difficulty=${props.difficulty}&type=multiple&token=${props.token}`
-  );
-
   function getQuestions() {
     fetch(
       `https://opentdb.com/api.php?amount=${props.numberOfQuestions}&category=${props.category}&difficulty=${props.difficulty}&type=multiple&token=${props.token}`
@@ -127,7 +122,7 @@ const Quizz = (props) => {
 
   return (
     <div className="quizz">
-      {questionsElements}
+      {questions.length > 1 ? questionsElements : ""}
       <div className="quizz__btn-container">
         {gameOver && (
           <p className="quizz__score">
