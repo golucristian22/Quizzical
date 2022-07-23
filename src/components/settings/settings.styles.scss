@@ -51,10 +51,17 @@
     letter-spacing: 0.2px;
   }
 
-  &__categories {
+  &__selection,
+  &__input {
     border-radius: 5px;
     font-weight: 600;
     letter-spacing: 1px;
     padding: 2px;
+  }
+
+  &__option-container {
+    margin: 7px 0;
+    display: flex;
+    flex-direction: column;
   }
 }

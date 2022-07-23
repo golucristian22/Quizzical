@@ -15,11 +15,6 @@ function Settings(props) {
     });
   }
 
-  // After the option is selected I need to pass data to the Quizz Component through props from App Component to call the api accordingly
-  // The API should be modified to match the selected option
-  // https://opentdb.com/api.php?amount=10&category=20&difficulty=medium&type=multiple
-  // https://opentdb.com/api.php?amount=10&category={selectedOptionId}&difficulty=medium&type=multiple
-
   function toggleExtended() {
     const settingsContainer = document.querySelector(".settings__container");
     settingsContainer.classList.toggle("extended");
@@ -34,17 +29,52 @@ function Settings(props) {
         onClick={toggleExtended}
       />
       <div className="settings__container">
-        <label className="settings__label" htmlFor="categories">
-          Select a category:
-        </label>
-        <select
-          className="settings__categories"
-          name="categories"
-          id="categories"
-          onChange={props.selectCategory}
-        >
-          {categoriesNames}
-        </select>
+        <div className="settings__option-container">
+          <label className="settings__label" htmlFor="categories">
+            Select a category:
+          </label>
+          <select
+            className="settings__selection settings__categories"
+            name="categories"
+            id="categories"
+            onChange={props.selectCategory}
+          >
+            {categoriesNames}
+          </select>
+        </div>
+        <div className="settings__option-container">
+          <label className="settings__label" htmlFor="numberOfQuestions">
+            How many question?
+          </label>
+          <input
+            type="number"
+            placeholder="10"
+            min="1"
+            max="10"
+            className="settings__input"
+            onChange={(e) => props.setNumberOfQuestions(e.target.value)}
+          />
+        </div>
+        <div className="settings__option-container">
+          <label className="settings__label" htmlFor="categories">
+            Select the questions difficulty:
+          </label>
+          <select
+            className="settings__selection"
+            name="difficulty"
+            id="difficulty"
+            onChange={(e) =>
+              props.setDifficulty(
+                e.target.options[e.target.selectedIndex].value
+              )
+            }
+          >
+            <option value="" disabled selected></option>
+            <option value="easy">easy</option>
+            <option value="medium">medium</option>
+            <option value="hard">hard</option>
+          </select>
+        </div>
       </div>
     </div>
   );

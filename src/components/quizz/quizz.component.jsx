@@ -7,10 +7,13 @@ const Quizz = (props) => {
   const [gameOver, setGameOver] = useState(false);
 
   console.log(questions);
+  console.log(
+    `https://opentdb.com/api.php?amount=${props.numberOfQuestions}&category=${props.category}&difficulty=${props.difficulty}&type=multiple&token=${props.token}`
+  );
 
   function getQuestions() {
     fetch(
-      `https://opentdb.com/api.php?amount=10&category=${props.category}&difficulty=medium&type=multiple&token=${props.token}`
+      `https://opentdb.com/api.php?amount=${props.numberOfQuestions}&category=${props.category}&difficulty=${props.difficulty}&type=multiple&token=${props.token}`
     )
       .then((response) => {
         if (!response.ok) {
@@ -80,7 +83,12 @@ const Quizz = (props) => {
     });
   }
 
-  useEffect(getQuestions, [props.token, props.category]);
+  useEffect(getQuestions, [
+    props.token,
+    props.category,
+    props.difficulty,
+    props.numberOfQuestions,
+  ]);
 
   function decodeHtml(html) {
     const txt = document.createElement("textarea");

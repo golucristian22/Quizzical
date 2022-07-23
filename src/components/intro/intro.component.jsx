@@ -14,7 +14,13 @@ function Intro(props) {
 
   return (
     <div className="intro">
-      <Settings categories={categories} selectCategory={props.selectCategory} />
+      <Settings
+        categories={categories}
+        setNumberOfQuestions={props.setNumberOfQuestions}
+        difficulty={props.difficulty}
+        setDifficulty={props.setDifficulty}
+        selectCategory={props.selectCategory}
+      />
       <h1 className="intro__heading">Quizzical</h1>
       <p className="intro__description">Test Your Knowledge!</p>
       <Link to={"quizz"}>
