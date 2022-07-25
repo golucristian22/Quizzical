@@ -69,7 +69,6 @@ function Settings(props) {
               )
             }
           >
-            <option value="" disabled></option>
             <option value="easy">easy</option>
             <option value="medium">medium</option>
             <option value="hard">hard</option>

@@ -54,9 +54,15 @@
   &__selection,
   &__input {
     border-radius: 5px;
+    font-size: 14px;
     font-weight: 600;
     letter-spacing: 1px;
     padding: 2px;
+    border: 1px solid #1a203f;
+  }
+
+  &__input {
+    padding: 2px 5px;
   }
 
   &__option-container {
