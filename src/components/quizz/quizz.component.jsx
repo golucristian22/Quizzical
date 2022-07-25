@@ -1,12 +1,12 @@
 import "./quizz.styles.scss";
 import { useState, useEffect } from "react";
+import { Link } from "react-router-dom";
 import PulseLoader from "react-spinners/PulseLoader";
 
 const Quizz = (props) => {
   const [loading, setLoading] = useState(false);
   const [score, setScore] = useState(0);
   const [gameOver, setGameOver] = useState(false);
-  console.log(props.questions.length);
 
   function selectAnswer(e) {
     // Select an answer
@@ -113,6 +113,51 @@ const Quizz = (props) => {
   });
 
   return (
+    // <div className="quizz">
+    //   {loading ? (
+    //     <>
+    //       <PulseLoader
+    //         color="#999"
+    //         loading={loading}
+    //         margin={5}
+    //         size={10}
+    //         speedMultiplier={0.6}
+    //       />
+    //     </>
+    //   ) : (
+    //     <>
+    //       {props.questions.length === 0 && (
+    //         <>
+    //           <p className="noQuestionsError">
+    //             The API doesn't have questions for these settings, try a
+    //             different category, or difficulty.
+    //           </p>
+    //           <Link to={"/"}>
+    //             <button className="quizz__btn">Go Back</button>
+    //           </Link>
+    //         </>
+    //       )}
+    //       {props.questions.length > 1 ? questionsElements : ""}
+    //       <div className="quizz__btn-container">
+    //         {gameOver && (
+    //           <p className="quizz__score">
+    //             You scored {`${score}/${props.questions.length}`} correct
+    //             answers
+    //           </p>
+    //         )}
+    //         {gameOver ? (
+    //           <button className="quizz__btn" onClick={resetGame}>
+    //             Play Again
+    //           </button>
+    //         ) : (
+    //           <button className="quizz__btn" onClick={checkAnswers}>
+    //             Check Answers
+    //           </button>
+    //         )}
+    //       </div>
+    //     </>
+    //   )}
+    // </div>
     <div className="quizz">
       {loading ? (
         <>
@@ -124,14 +169,18 @@ const Quizz = (props) => {
             speedMultiplier={0.6}
           />
         </>
+      ) : props.questions.length === 0 ? (
+        <>
+          <p className="noQuestionsError">
+            The API doesn't have questions for these settings, try a different
+            category, or difficulty.
+          </p>
+          <Link to={"/"}>
+            <button className="quizz__btn">Go Back</button>
+          </Link>
+        </>
       ) : (
         <>
-          {props.questions.length === 0 && (
-            <p className="noQuestionsError">
-              The API doesn't have questions for these settings, try a different
-              category, or difficulty.
-            </p>
-          )}
           {props.questions.length > 1 ? questionsElements : ""}
           <div className="quizz__btn-container">
             {gameOver && (
