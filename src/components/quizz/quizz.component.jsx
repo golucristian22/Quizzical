@@ -6,6 +6,7 @@ const Quizz = (props) => {
   const [loading, setLoading] = useState(false);
   const [score, setScore] = useState(0);
   const [gameOver, setGameOver] = useState(false);
+  console.log(props.questions.length);
 
   function selectAnswer(e) {
     // Select an answer
@@ -125,6 +126,12 @@ const Quizz = (props) => {
         </>
       ) : (
         <>
+          {props.questions.length === 0 && (
+            <p className="noQuestionsError">
+              The API doesn't have questions for these settings, try a different
+              category, or difficulty.
+            </p>
+          )}
           {props.questions.length > 1 ? questionsElements : ""}
           <div className="quizz__btn-container">
             {gameOver && (
